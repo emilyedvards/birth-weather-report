@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Birth Weather by ee</title>
+    <meta name="description" content="Generate a birth weather report from the date, time, and place you arrived.">
+    <meta property="og:title" content="Birth Weather by ee">
+    <meta property="og:description" content="Generate a birth weather report from the date, time, and place you arrived.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Birth Weather by ee">
+    <meta name="twitter:description" content="Generate a birth weather report from the date, time, and place you arrived.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css?v=16">
+    <script src="app.js?v=18" defer></script>
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="hero" aria-labelledby="page-title">
+        <h1 id="page-title">BIRTH WEATHER REPORT</h1>
+        <p class="intro">
+          <span class="highlight">Find the weather conditions at the time and place you arrived.</span>
+        </p>
+      </section>
+
+      <div id="input-divider" class="ascii-divider" aria-hidden="true">************************************************************</div>
+
+      <section class="lookup-section" aria-labelledby="lookup-title">
+        <h2 id="lookup-title" class="section-label"><span>INPUT</span></h2>
+
+        <form id="birthweather-form" class="lookup-form" novalidate>
+          <div class="field">
+            <label for="birth-name">Name</label>
+            <input
+              id="birth-name"
+              name="birthName"
+              type="text"
+              autocomplete="name"
+              placeholder="Name"
+              aria-describedby="birth-name-error"
+            >
+            <p id="birth-name-error" class="error-message" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="birth-date">Date of Birth</label>
+            <div class="masked-input">
+              <span id="birth-date-mask" class="input-mask" aria-hidden="true">MM/DD/YYYY</span>
+              <input
+                id="birth-date"
+                name="birthDate"
+                type="text"
+                inputmode="numeric"
+                autocomplete="bday"
+                maxlength="10"
+                aria-describedby="birth-date-error"
+              >
+            </div>
+            <p id="birth-date-error" class="error-message" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="birth-time">Time of Birth</label>
+            <div class="time-field">
+              <div class="masked-input">
+                <span id="birth-time-mask" class="input-mask" aria-hidden="true">00:00</span>
+                <input
+                  id="birth-time"
+                  name="birthTime"
+                  type="text"
+                  autocomplete="off"
+                  maxlength="5"
+                  aria-describedby="birth-time-error"
+                >
+              </div>
+              <div class="meridiem-options" aria-label="Select AM or PM">
+                <button class="meridiem-button" type="button" data-meridiem="AM" aria-pressed="false">AM</button>
+                <button class="meridiem-button" type="button" data-meridiem="PM" aria-pressed="false">PM</button>
+              </div>
+            </div>
+            <p id="birth-time-error" class="error-message" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="birth-city">City</label>
+            <input
+              id="birth-city"
+              name="birthCity"
+              type="text"
+              autocomplete="address-level2"
+              placeholder="City"
+              aria-describedby="birth-city-error"
+            >
+            <p id="birth-city-error" class="error-message" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="birth-state">State</label>
+            <input
+              id="birth-state"
+              name="birthState"
+              type="text"
+              autocomplete="address-level1"
+              placeholder="State"
+              aria-describedby="birth-state-error"
+            >
+            <p id="birth-state-error" class="error-message" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="birth-country">Country</label>
+            <input
+              id="birth-country"
+              name="birthCountry"
+              type="text"
+              autocomplete="country-name"
+              placeholder="Country"
+              aria-describedby="birth-country-error"
+            >
+            <p id="birth-country-error" class="error-message" aria-live="polite"></p>
+          </div>
+
+          <button class="submit-button" type="submit">RUN REPORT</button>
+        </form>
+
+        <div id="progress-section" class="progress-section" hidden aria-live="polite">
+          <p id="progress-label">GENERATING REPORT 0%</p>
+          <div class="progress-track" aria-hidden="true">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="result" class="result-section" aria-live="polite" hidden>
+        <div class="ascii-divider result-divider" aria-hidden="true">////////////////////////////////////////////////////////////</div>
+        <h2 class="section-label"><span id="result-heading">RESULT</span></h2>
+        <p id="result-status"></p>
+        <div id="weather-summary" class="weather-summary" hidden>
+          <h3>Birth Weather Report</h3>
+          <p id="summary-name"></p>
+          <p id="summary-location"></p>
+          <p id="summary-date"></p>
+          <p id="summary-time"></p>
+          <p id="summary-temperature"></p>
+          <p id="summary-cloud-cover"></p>
+          <p id="summary-humidity"></p>
+          <p id="summary-wind-speed"></p>
+          <p id="summary-precipitation"></p>
+          <p id="summary-maritime-line" class="maritime-line"></p>
+          <div class="result-actions">
+            <button id="print-button" class="action-button" type="button">PRINT</button>
+            <button id="run-another-button" class="action-button" type="button">RUN ANOTHER</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
